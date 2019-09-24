@@ -1,4 +1,4 @@
-2title 'local policies'
+title 'local policies'
 
 control 'windows-010' do
   title 'Ensure \'Access Credential Manager as a trusted caller\' is set to \'No One\''
