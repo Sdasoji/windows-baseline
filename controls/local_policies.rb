@@ -1,4 +1,4 @@
-2title 'local policies'
+title 'local policies'
 
 control 'windows-010' do
   title 'Ensure \'Access Credential Manager as a trusted caller\' is set to \'No One\''
@@ -37,7 +37,7 @@ control 'windows-011' do
   ref 'Umsetzungshinweise zum Baustein SYS.1.2.2: Windows Server 2012', url: 'https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-Grundschutz-Modernisierung/UH_Windows_Server_2012.html'
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
-    its('SeNetworkLogonRight') { should eq attribute('Gilead_se_network_logon_right) }
+    its('SeNetworkLogonRight') { should eq attribute('se_network_logon_right') }
   end
 end
 
@@ -59,6 +59,28 @@ control 'windows-012' do
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
     its('SeTcbPrivilege') { should eq [] }
+  end
+end
+
+control 'windows-013' do
+  title 'Ensure \'Add workstations to domain\' is set to \'Administrators\''
+  desc 'This policy setting specifies which users can add computer workstations to the domain. For this policy setting to take effect, it must be assigned to the user as part of the Default Domain Controller Policy for the domain. A user who has been assigned this right can add up to 10 workstations to the domain. Users who have been assigned the Create Computer Objects permission for an OU or the Computers container in Active Directory can add an unlimited number of computers to the domain, regardless of whether or not they have been assigned the Add workstations to domain user right.
+
+  In Windows-based networks, the term security principal is defined as a user, group, or computer that is automatically assigned a security identifier to control access to resources. In an Active Directory domain, each computer account is a full security principal with the ability to authenticate and access domain resources. However, some organizations may want to limit the number of computers in an Active Directory environment so that they can consistently track, build, and manage the computers. If users are allowed to add computers to the domain, tracking and management efforts would be hampered. Also, users could perform activities that are more difficult to trace because of their ability to create additional unauthorized domain computers.
+
+  The recommended state for this setting is: Administrators.'
+  impact 1.0
+  tag 'windows': %w[2012R2 2016 2019]
+  tag 'profile': ['Domain Controller', 'Member Server']
+  tag 'CIS Microsoft Windows Server 2012 R2 Benchmark v2.3.0 - 03-30-2018': '2.2.4'
+  tag 'CIS Microsoft Windows Server 2016 RTM (Release 1607) Benchmark v1.1.0 - 10-31-2018': '2.2.5'
+  tag 'level': '1'
+  tag 'bsi': ['SYS.1.2.2.M3', 'Sichere Administration', 'SYS.1.2.2.M4', 'Sichere Konfiguration']
+  ref 'IT-Grundschutz-Kompendium', url: 'https://www.bsi.bund.de/DE/Themen/ITGrundschutz/ITGrundschutzKompendium/itgrundschutzKompendium_node.html'
+  ref 'Umsetzungshinweise zum Baustein SYS.1.2.2: Windows Server 2012', url: 'https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-Grundschutz-Modernisierung/UH_Windows_Server_2012.html'
+  ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
+  describe security_policy do
+    its('SeMachineAccountPrivilege') { should eq ['S-1-5-32-544'] }
   end
 end
 
@@ -107,7 +129,6 @@ control 'windows-015' do
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
     its('SeInteractiveLogonRight') { should eq attribute('se_interactive_logon_right') }
-       
   end
 end
 
@@ -137,7 +158,6 @@ control 'windows-016' do
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
     its('SeRemoteInteractiveLogonRight') { should eq attribute('se_remote_interactive_logon_right') }
-    its('SeInteractiveLogonRight') { should eq ('S-1-5-32-555') } 
   end
 end
 
@@ -969,7 +989,6 @@ control 'windows-053' do
   end
 end
 
-=begin  not required as per Gilead Standards
 control 'windows-054' do
   title 'Configure \'Accounts: Rename administrator account\''
   desc 'The built-in local administrator account is a well-known account name that attackers will target. It is recommended to choose another name for this account, and to avoid names that denote administrative or elevated access accounts. Be sure to also change the default description for the local administrator (through the Computer Management console). On Domain Controllers, since they do not have their own local accounts, this rule refers to the built-in Administrator account that was established when the domain was first created.'
@@ -1005,7 +1024,7 @@ control 'windows-055' do
     it { should_not exist }
   end
 end
-=end
+
 control 'windows-056' do
   title 'Ensure \'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings\' is set to \'Enabled\''
   desc 'This policy setting allows administrators to enable the more precise auditing capabilities present in Windows Vista.
@@ -1294,7 +1313,7 @@ control 'windows-067' do
   describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\Netlogon\\Parameters') do
     it { should exist }
     it { should have_property 'MaximumPasswordAge' }
-    its('MaximumPasswordAge') { should cmp <= 180 }
+    its('MaximumPasswordAge') { should cmp <= 30 }
   end
 end
 
@@ -1455,7 +1474,7 @@ control 'windows-074' do
   end
   describe registry_key('HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon') do
     it { should exist }
-    its('CachedLogonsCount') { should be <= 10 }
+    its('CachedLogonsCount') { should be <= 4 }
   end
 end
 
@@ -1486,7 +1505,6 @@ control 'windows-075' do
   end
 end
 
-=begin
 control 'windows-076' do
   title 'Ensure \'Interactive logon: Require Domain Controller Authentication to unlock workstation\' is set to \'Enabled\''
   desc 'Logon information is required to unlock a locked computer. For domain accounts, this security setting determines whether it is necessary to contact a Domain Controller to unlock a computer.
@@ -1511,7 +1529,7 @@ control 'windows-076' do
     its('ForceUnlockLogon') { should eq 1 }
   end
 end
-=end
+
 control 'windows-077' do
   title 'Ensure \'Interactive logon: Smart card removal behavior\' is set to \'Lock Workstation\' or higher'
   desc 'This policy setting determines what happens when the smart card for a logged-on user is removed from the smart card reader.
