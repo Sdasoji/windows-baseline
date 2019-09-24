@@ -13,7 +13,7 @@ attributes:
   - name: level_1_or_2
     required: false
     description: 'define if you want to execute Level 1 or (Level 1 and Level 2)'
-    value: 1,
+    value: 2,
     type: numeric
   - name: ms_or_dc
     required: false
@@ -23,12 +23,12 @@ attributes:
   - name: password_history_size
     required: false
     description: 'define password history size'
-    value: 24
+    value: 15
     type: numeric
   - name: maximum_password_age
     required: false
     description: 'define MaximumPasswordAge'
-    value: 60
+    value: 180
     type: numeric
   - name: se_network_logon_right
     required: false
