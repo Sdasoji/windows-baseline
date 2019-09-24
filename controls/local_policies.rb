@@ -1,4 +1,4 @@
-2title 'local policies'
+title 'local policies'
 
 control 'windows-010' do
   title 'Ensure \'Access Credential Manager as a trusted caller\' is set to \'No One\''
@@ -37,7 +37,7 @@ control 'windows-011' do
   ref 'Umsetzungshinweise zum Baustein SYS.1.2.2: Windows Server 2012', url: 'https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-Grundschutz-Modernisierung/UH_Windows_Server_2012.html'
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
-    its('SeNetworkLogonRight') { should eq attribute('Gilead_se_network_logon_right) }
+    its('SeNetworkLogonRight') { should eq attribute('Gilead_se_network_logon_right') }
   end
 end
 
@@ -185,9 +185,7 @@ end
 
 control 'windows-019' do
   title 'Ensure \'Change the time zone\' is set to \'Administrators, LOCAL SERVICE\''
-  desc 'This setting determines which users can change the time zone of the computer. This ability holds no great danger for the computer and may be useful for mobile workers.
-
-  The recommended state for this setting is: Administrators, LOCAL SERVICE.'
+  desc 'This setting determines which users can change the time zone of the computer. This ability holds no great danger for the computer and may be useful for mobile workers.The recommended state for this setting is: Administrators, LOCAL SERVICE.'
   impact 1.0
   tag 'windows': %w[2012R2 2016 2019]
   tag 'profile': ['Domain Controller', 'Member Server']
