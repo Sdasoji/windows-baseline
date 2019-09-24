@@ -185,9 +185,7 @@ end
 
 control 'windows-019' do
   title 'Ensure \'Change the time zone\' is set to \'Administrators, LOCAL SERVICE\''
-  desc 'This setting determines which users can change the time zone of the computer. This ability holds no great danger for the computer and may be useful for mobile workers.
-
-  The recommended state for this setting is: Administrators, LOCAL SERVICE.'
+  desc 'This setting determines which users can change the time zone of the computer. This ability holds no great danger for the computer and may be useful for mobile workers.The recommended state for this setting is: Administrators, LOCAL SERVICE.'
   impact 1.0
   tag 'windows': %w[2012R2 2016 2019]
   tag 'profile': ['Domain Controller', 'Member Server']
