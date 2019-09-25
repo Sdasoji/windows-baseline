@@ -227,7 +227,7 @@ control 'windows-368' do
     end
   end
 end
-
+=begin
 control 'windows-369' do
   title 'Ensure \'Do not suggest third-party content in Windows spotlight\' is set to \'Enabled\''
   desc 'This policy setting determines whether Windows will suggest apps and content from third-party software publishers.
@@ -305,7 +305,7 @@ control 'windows-371' do
     end
   end
 end
-
+=end
 control 'windows-372' do
   title 'Ensure \'Prevent users from sharing files within their profile.\' is set to \'Enabled\''
   desc 'This policy setting specifies whether users can share files within their profile. By default users are allowed to share files within their profile to other users on their network after an administrator opts in the computer. An administrator can opt in the computer by using the sharing wizard to share a file within their profile.
@@ -357,7 +357,7 @@ control 'windows-373' do
     end
   end
 end
-
+=begin
 control 'windows-374' do
   title 'Ensure \'Prevent Codec Download\' is set to \'Enabled\''
   desc 'This setting controls whether Windows Media Player is allowed to download additional codecs for decoding media files it does not already understand.
@@ -384,3 +384,4 @@ control 'windows-374' do
     end
   end
 end
+=end

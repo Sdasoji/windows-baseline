@@ -18,7 +18,7 @@ attributes:
   - name: ms_or_dc
     required: false
     description: 'define if you want to execute the profile in the context of a Memeber Server (MS) or Domain Controler (DC)'
-    value: 'MS'
+    value: 'ms'
     type: string
   - name: password_history_size
     required: false
