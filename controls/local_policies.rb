@@ -137,7 +137,7 @@ control 'windows-016' do
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
     its('SeRemoteInteractiveLogonRight') { should eq attribute('se_remote_interactive_logon_right') }
-    its('SeInteractiveLogonRight') { should eq ('S-1-5-32-555') } 
+    its('SeInteractiveLogonRight') { should eq ('S-1-5-32-544') } 
   end
 end
 
@@ -756,7 +756,7 @@ control 'windows-044' do
   ref 'Umsetzungshinweise zum Baustein SYS.1.2.2: Windows Server 2012', url: 'https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-Grundschutz-Modernisierung/UH_Windows_Server_2012.html'
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
-    its('SeSystemProfilePrivilege') { should eq ['S-1-5-32-544', 'S-1-5-80-3139157870-2983391045-3678747466-658725712-1809340420'] }
+    its('SeSystemProfilePrivilege') { should eq ['S-1-5-32-544'] }
   end
 end
 
@@ -872,7 +872,7 @@ control 'windows-049' do
     its('SeTakeOwnershipPrivilege') { should eq ['S-1-5-32-544'] }
   end
 end
-
+=begin
 control 'windows-050' do
   title 'Ensure \'Accounts: Administrator account status\' is set to \'Disabled\''
   desc 'This policy setting enables or disables the Administrator account during normal operation. When a computer is booted into safe mode, the Administrator account is always enabled, regardless of how this setting is configured. Note that this setting will have no impact when applied to the Domain Controllers organizational unit via group policy because Domain Controllers have no local account database. It can be configured at the domain level via group policy, similar to account lockout and password policy settings.
@@ -896,7 +896,8 @@ control 'windows-050' do
     it { should be_disabled }
   end
 end
-
+=end
+=begin
 control 'windows-051' do
   title 'Ensure \'Accounts: Block Microsoft accounts\' is set to \'Users can\'t add or log on with Microsoft accounts\''
   desc 'This policy setting prevents users from adding new Microsoft accounts on this computer.
@@ -918,6 +919,7 @@ control 'windows-051' do
     its('NoConnectedUser') { should eq 3 }
   end
 end
+=end
 
 control 'windows-052' do
   title 'Ensure \'Accounts: Guest account status\' is set to \'Disabled\''
@@ -1908,7 +1910,7 @@ control 'windows-092' do
   describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedExactPaths') do
     it { should exist }
     it { should have_property 'Machine' }
-    its('Machine') { should eq ['System\\CurrentControlSet\\Control\\ProductOptions', 'System\\CurrentControlSet\\Control\\Server Applications', 'Software\\Microsoft\\Windows NT\\CurrentVersion'] }
+    its('Machine') { should match ['System\\CurrentControlSet\\Control\\ProductOptions', 'System\\CurrentControlSet\\Control\\Server Applications', 'Software\\Microsoft\\Windows NT\\CurrentVersion'] }
   end
 
 end
@@ -1972,7 +1974,7 @@ control 'windows-093' do
     describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedPaths') do
       it { should exist }
       it { should have_property 'Machine' }
-      its('Machine') { should eq ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog', 'System\\CurrentControlSet\\Services\\CertSvc', 'System\\CurrentControlSet\\Services\\WINS'] }
+      its('Machine') { should match ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog', 'System\\CurrentControlSet\\Services\\CertSvc', 'System\\CurrentControlSet\\Services\\WINS'] }
     end
   end
 end
@@ -1998,7 +2000,7 @@ control 'windows-094' do
     its('RestrictNullSessAccess') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-095' do
   title 'Ensure \'Network access: Restrict clients allowed to make remote calls to SAM\' is set to \'Administrators: Remote Access: Allow\''
   desc 'This policy setting allows you to restrict remote RPC connections to SAM.
@@ -2023,7 +2025,7 @@ control 'windows-095' do
     its('restrictremotesam') { should eq 'O:BAG:BAD:(A;;RC;;;BA)' }
   end
 end
-
+=end
 control 'windows-096' do
   title 'Ensure \'Network access: Shares that can be accessed anonymously\' is set to \'None\''
   desc 'This policy setting determines which network shares can be accessed by anonymous users. The default configuration for this policy setting has little effect because all users have to be authenticated before they can access shared resources on the server.
@@ -2042,7 +2044,7 @@ control 'windows-096' do
   describe registry_key('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters') do
     it { should exist }
     it { should have_property 'NullSessionShares' }
-    its('NullSessionShares') { should eq [''] }
+    its('NullSessionShares') { should cmp [''] }
   end
 end
 
@@ -2419,7 +2421,7 @@ control 'windows-112' do
     its('EnableUIADesktopToggle') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-113' do
   title 'Ensure \'User Account Control: Behavior of the elevation prompt for administrators in Admin Approval Mode\' is set to \'Prompt for consent on the secure desktop\''
   desc 'This policy setting controls the behavior of the elevation prompt for administrators.
@@ -2441,6 +2443,7 @@ control 'windows-113' do
     its('ConsentPromptBehaviorAdmin') { should eq 2 }
   end
 end
+=end
 
 control 'windows-114' do
   title 'Ensure \'User Account Control: Behavior of the elevation prompt for standard users\' is set to \'Automatically deny elevation requests\''
@@ -2465,7 +2468,7 @@ control 'windows-114' do
 end
 
 control 'windows-115' do
-  title 'Ensure \'User Account Control: Detect application installations and prompt for elevation\' is set to \'Enabled\''
+  title 'Ensure \'User Account Control: Detect application installations and prompt for elevation\' is set to \'Disabled\''
   desc 'This policy setting controls the behavior of application installation detection for the computer.
 
   The recommended state for this setting is: Enabled.'
@@ -2482,7 +2485,7 @@ control 'windows-115' do
   describe registry_key('HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System') do
     it { should exist }
     it { should have_property 'EnableInstallerDetection' }
-    its('EnableInstallerDetection') { should eq 1 }
+    its('EnableInstallerDetection') { should eq 0 }
   end
 end
 
