@@ -43,7 +43,7 @@ control 'windows-176' do
     its('NoLockScreenSlideshow') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-177' do
   title 'Ensure \'Allow Input Personalization\' is set to \'Disabled\''
   desc 'This policy enables the automatic learning component of input personalization that includes speech, inking, and typing. Automatic learning enables the collection of speech and handwriting patterns, typing history, contacts, and recent calendar information. It is required for the use of Cortana. Some of this collected information may be stored on the user\'s OneDrive, in the case of inking and typing; some of the information will be uploaded to Microsoft to personalize speech.
@@ -91,7 +91,7 @@ control 'windows-178' do
     its('AllowOnlineTips') { should eq 0 }
   end
 end
-
+=end
 control 'windows-179' do
   title 'Ensure LAPS AdmPwd GPO Extension / CSE is installed (MS only)'
   desc 'In May 2015, Microsoft released the Local Administrator Password Solution (LAPS) tool, which is free and supported software that allows an organization to automatically set randomized and unique local Administrator account passwords on domain-attached workstations and member servers. The passwords are stored in a confidential attribute of the domain computer account and can be retrieved from Active Directory by approved Sysadmins when needed.
@@ -309,6 +309,7 @@ control 'windows-185' do
   end
 end
 
+=begin
 control 'windows-186' do
   title 'Ensure \'Configure SMB v1 client driver\' is set to \'Enabled: Disable driver\''
   desc 'This setting configures the start type for the Server Message Block version 1 (SMBv1) client driver service (MRxSmb10), which is recommended to be disabled.
@@ -347,7 +348,8 @@ control 'windows-186' do
     its('Start') { should eq 4 }
   end
 end
-
+=end
+=begin
 control 'windows-187' do
   title 'Ensure \'Configure SMB v1 server\' is set to \'Disabled\''
   desc 'This setting configures the server-side processing of the Server Message Block version 1 (SMBv1) protocol.
@@ -379,7 +381,8 @@ control 'windows-187' do
     its('SMB1') { should eq 0 }
   end
 end
-
+=end
+=begin
 control 'windows-188' do
   title 'Ensure \'Enable Structured Exception Handling Overwrite Protection (SEHOP)\' is set to \'Enabled\''
   desc 'Windows includes support for Structured Exception Handling Overwrite Protection (SEHOP). We recommend enabling this feature to improve the security profile of the computer.
@@ -403,7 +406,7 @@ control 'windows-188' do
     its('DisableExceptionChainValidation') { should eq 0 }
   end
 end
-
+=end
 control 'windows-189' do
   title 'Ensure \'WDigest Authentication\' is set to \'Disabled\''
   desc 'When WDigest authentication is enabled, Lsass.exe retains a copy of the user\'s plaintext password in memory, where it can be at risk of theft. If this setting is not configured, WDigest authentication is disabled in Windows 8.1 and in Windows Server 2012 R2; it is enabled by default in earlier versions of Windows and Windows Server.
@@ -429,7 +432,7 @@ control 'windows-189' do
     its('UseLogonCredential') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-191' do
   title 'Ensure \'Turn on Windows Defender protection against Potentially Unwanted Applications\' is set to \'Enabled\''
   desc 'Enabling this Windows Defender feature will protect against Potentially Unwanted Applications (PUA), which are sneaky unwanted application bundlers or their bundled applications to deliver adware or malware.
@@ -453,7 +456,7 @@ control 'windows-191' do
     its('MpEnablePus') { should eq 1 }
   end
 end
-
+=end
 control 'windows-192' do
   title 'Ensure \'MSS: (AutoAdminLogon) Enable Automatic Logon (not recommended)\' is set to \'Disabled\''
   desc 'This setting is separate from the Welcome screen feature in Windows XP and Windows Vista; if that feature is disabled, this setting is not disabled. If you configure a computer for automatic logon, anyone who can physically gain access to the computer can also gain access to everything that is on the computer, including any network or networks to which the computer is connected. Also, if you enable automatic logon, the password is stored in the registry in plaintext, and the specific registry key that stores this value is remotely readable by the Authenticated Users group.
@@ -767,7 +770,7 @@ control 'windows-204' do
     its('NodeType') { should eq 2 }
   end
 end
-
+=begin
 control 'windows-205' do
   title 'Ensure \'Turn off multicast name resolution\' is set to \'Enabled\' (MS Only)'
   desc 'LLMNR is a secondary name resolution protocol. With LLMNR, queries are sent using multicast over a local network link on a single subnet from a client computer to another client computer on the same subnet that also has LLMNR enabled. LLMNR does not require a DNS server or DNS client configuration, and provides name resolution in scenarios in which conventional DNS name resolution is not possible.
@@ -791,7 +794,8 @@ control 'windows-205' do
     its('EnableMulticast') { should eq 0 }
   end
 end
-
+=end
+=begin
 control 'windows-206' do
   title ' Ensure \'Enable Font Providers\' is set to \'Disabled\''
   desc 'This policy setting determines whether Windows is allowed to download fonts and font catalog data from an online font provider.
@@ -815,7 +819,8 @@ control 'windows-206' do
     its('EnableFontProviders') { should eq 0 }
   end
 end
-
+=end
+=begin
 control 'windows-207' do
   title 'Ensure \'Enable insecure guest logons\' is set to \'Disabled\''
   desc 'This policy setting determines if the SMB client will allow insecure guest logons to an SMB server.
@@ -839,7 +844,7 @@ control 'windows-207' do
     its('AllowInsecureGuestAuth') { should eq 0 }
   end
 end
-
+=end
 control 'windows-208' do
   title 'Ensure \'Turn on Mapper I/O (LLTDIO) driver\' is set to \'Disabled\''
   desc 'This policy setting changes the operational behavior of the Mapper I/O network protocol driver.
@@ -972,7 +977,7 @@ control 'windows-211' do
     its('NC_AllowNetBridge_NLA') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-212' do
   title 'Ensure \'Prohibit use of Internet Connection Sharing on your DNS domain network\' is set to \'Enabled\''
   desc 'Although this "legacy" setting traditionally applied to the use of Internet Connection Sharing (ICS) in Windows 2000, Windows XP & Server 2003, this setting now freshly applies to the Mobile Hotspot feature in Windows 10 & Server 2016.
@@ -996,7 +1001,7 @@ control 'windows-212' do
     its('NC_ShowSharedAccessUI') { should eq 0 }
   end
 end
-
+=end
 control 'windows-213' do
   title 'Ensure \'Require domain users to elevate when setting a network\'s location\' is set to \'Enabled\''
   desc 'This policy setting determines whether to require domain users to elevate when setting a network\'s location.
@@ -1149,7 +1154,7 @@ control 'windows-217' do
     its('DisableWcnUi') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-218' do
   title 'Ensure \'Minimize the number of simultaneous connections to the Internet or a Windows Domain\' is set to \'Enabled\''
   desc 'This policy setting prevents computers from connecting to both a domain based network and a non-domain based network at the same time.
@@ -1171,6 +1176,7 @@ control 'windows-218' do
     its('fMinimizeConnections') { should eq 1 }
   end
 end
+=end
 
 control 'windows-219' do
   title 'Ensure \'Prohibit connection to non-domain networks when connected to domain authenticated network\' is set to \'Enabled\' (MS only)'
