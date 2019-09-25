@@ -241,7 +241,7 @@ control 'windows-183' do
   describe registry_key('HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft Services\\AdmPwd') do
     it { should exist }
     it { should have_property 'PasswordLength' }
-    its('PasswordLength') { should be >= 15 }
+    its('PasswordLength') { should be >= 8 }
   end
 end
 
@@ -1051,7 +1051,7 @@ control 'windows-214' do
   ref 'IT-Grundschutz-Kompendium', url: 'https://www.bsi.bund.de/DE/Themen/ITGrundschutz/ITGrundschutzKompendium/itgrundschutzKompendium_node.html'
   ref 'Umsetzungshinweise zum Baustein SYS.1.2.2: Windows Server 2012', url: 'https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Grundschutz/IT-Grundschutz-Modernisierung/UH_Windows_Server_2012.html'
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
-  describe registry_key('HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\NetworkProvider\\HardenedPaths') do
+  describe registry_key('HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\NetworkProvider\\HardenedPaths') do
     it { should exist }
     it { should have_property '\\\*\\NETLOGON' }
     it { should have_property '\\\*\\SYSVOL' }
@@ -1223,7 +1223,7 @@ control 'windows-220' do
     its('ProcessCreationIncludeCmdLine_Enabled') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-221' do
   title 'Ensure \'Remote host allows delegation of non-exportable credentials\' is set to \'Enabled\''
   desc 'Remote host allows delegation of non-exportable credentials. When using credential delegation, devices provide an exportable version of credentials to the remote host. This exposes users to the risk of credential theft from attackers on the remote host. The Restricted Admin Mode and Windows Defender Remote Credential Guard features are two options to help protect against this risk.
@@ -1244,7 +1244,7 @@ control 'windows-221' do
     its('AllowProtectedCreds') { should eq 1 }
   end
 end
-
+=end
 control 'windows-222' do
   title 'Ensure \'Boot-Start Driver Initialization Policy\' is set to \'Enabled: Good, unknown and bad but critical\''
   desc 'This policy setting allows you to specify which boot-start drivers are initialized based on a classification determined by an Early Launch Antimalware boot-start driver. The Early Launch Antimalware boot-start driver can return the following classifications for each boot-start driver:
@@ -1320,7 +1320,7 @@ control 'windows-224' do
     its('NoGPOListChanges') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-225' do
   title 'Ensure \'Continue experiences on this device\' is set to \'Disabled\''
   desc 'This policy setting determines whether the Windows device is allowed to participate in cross-device experiences (continue experiences).
@@ -1344,7 +1344,7 @@ control 'windows-225' do
     its('EnableCdp') { should eq 0 }
   end
 end
-
+=end
 control 'windows-226' do
   title 'Ensure \'Turn off background refresh of Group Policy\' is set to \'Disabled\''
   desc 'This policy setting prevents Group Policy from being updated while the computer is in use. This policy setting applies to Group Policy for computers, users and Domain Controllers.
@@ -1694,6 +1694,7 @@ control 'windows-239' do
   end
 end
 
+=begin
 control 'windows-240' do
   title 'Ensure \'Support device authentication using certificate\' is set to \'Enabled: Automatic\''
   desc 'This policy setting allows you to set support for Kerberos to attempt authentication using the certificate for the device to the domain.
@@ -1724,7 +1725,7 @@ control 'windows-240' do
     its('DevicePKInitEnabled') { should eq 1 }
   end
 end
-
+=end
 control 'windows-241' do
   title 'Ensure \'Disallow copying of user input methods to the system account for sign-in\' is set to \'Enabled\''
   desc 'This policy prevents automatic copying of user input methods to the system account for use on the sign-in screen. The user is restricted to the set of input methods that are enabled in the system account.
@@ -1749,7 +1750,7 @@ control 'windows-241' do
     its('BlockUserInputMethodsForSignIn') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-242' do
   title 'Ensure \'Block user from showing account details on signin\' is set to \'Enabled\''
   desc 'This policy prevents the user from showing account details (email address or user name) on the sign-in screen.
@@ -1774,7 +1775,7 @@ control 'windows-242' do
     its('BlockUserFromShowingAccountDetailsOnSignin') { should eq 1 }
   end
 end
-
+=end
 control 'windows-243' do
   title 'Ensure \'Do not enumerate connected users on domain-joined computers\' is set to \'Enabled\''
   desc 'This policy setting prevents connected users from being enumerated on domain-joined computers.
@@ -1918,7 +1919,7 @@ control 'windows-248' do
     its('AllowDomainPINLogon') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-249' do
   title 'Ensure \'Untrusted Font Blocking\' is set to \'Enabled: Block untrusted fonts and log events\''
   desc 'This security feature provides a global setting to prevent programs from loading untrusted fonts. Untrusted fonts are any font installed outside of the %windir%\Fonts directory. This feature can be configured to be in 3 modes: On, Off, and Audit.
@@ -1942,7 +1943,9 @@ control 'windows-249' do
     its('MitigationOptions_FontBocking') { should eq '1000000000000' }
   end
 end
+=end 
 
+=begin
 control 'windows-250' do
   title 'Ensure \'Require a password when a computer wakes (on battery)\' is set to \'Enabled\''
   desc 'Specifies whether or not the user is prompted for a password when the system resumes from sleep.
@@ -1992,7 +1995,7 @@ control 'windows-251' do
     its('ACSettingIndex') { should eq 0 }
   end
 end
-
+=end
 control 'windows-252' do
   title 'Ensure \'Require a password when a computer wakes (on battery)\' is set to \'Enabled\''
   desc 'Specifies whether or not the user is prompted for a password when the system resumes from sleep.
@@ -2150,7 +2153,7 @@ control 'windows-257' do
     its('RestrictRemoteClients') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-258' do
   title 'Ensure \'Microsoft Support Diagnostic Tool: Turn on MSDT interactive communication with support provider\' is set to \'Disabled\''
   desc ' This policy setting configures Microsoft Support Diagnostic Tool (MSDT) interactive communication with the support provider. MSDT gathers diagnostic data for analysis by support professionals.
@@ -2175,7 +2178,7 @@ control 'windows-258' do
     its('DisableQueryRemoteServer') { should eq 0 }
   end
 end
-
+=end
 control 'windows-259' do
   title 'Ensure \'Enable/Disable PerfTrack\' is set to \'Disabled\''
   desc 'This policy setting specifies whether to enable or disable tracking of responsiveness events.
@@ -2200,7 +2203,7 @@ control 'windows-259' do
     its('ScenarioExecutionEnabled') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-260' do
   title 'Ensure \'Turn off the advertising ID\' is set to \'Enabled\''
   desc 'This policy setting turns off the advertising ID, preventing apps from using the ID for experiences across apps.
@@ -2225,7 +2228,7 @@ control 'windows-260' do
     its('DisabledByGroupPolicy') { should eq 1 }
   end
 end
-
+=end 
 control 'windows-261' do
   title 'Ensure \'Enable Windows NTP Client\' is set to \'Enabled\''
   desc 'This policy setting specifies whether the Windows NTP Client is enabled. Enabling the Windows NTP Client allows your computer to synchronize its computer clock with other NTP servers. You might want to disable this service if you decide to use a third-party time provider.
@@ -2276,6 +2279,7 @@ control 'windows-262' do
   end
 end
 
+=begin
 control 'windows-263' do
   title 'Ensure \'Allow a Windows app to share application data between users\' is set to \'Disabled\''
   desc 'Manages a Windows app\'s ability to share data between users who have installed the app. Data is shared through the SharedLocal folder. This folder is available through the Windows.Storage API.
@@ -2299,7 +2303,7 @@ control 'windows-263' do
     its('AllowSharedLocalAppData') { should eq 0 }
   end
 end
-
+=end
 control 'windows-264' do
   title 'Ensure \'Allow Microsoft accounts to be optional\' is set to \'Enabled\''
   desc 'This policy setting lets you control whether Microsoft accounts are optional for Windows Store apps that require an account to sign in. This policy only affects Windows Store apps that support it.
@@ -2392,7 +2396,7 @@ control 'windows-267' do
     its('NoDriveTypeAutoRun') { should eq 255 }
   end
 end
-
+=begin
 control 'windows-268' do
   title 'Ensure \'Configure enhanced anti-spoofing\' is set to \'Enabled\''
   desc 'This policy setting determines whether enhanced anti-spoofing is configured for devices which support it.
@@ -2510,6 +2514,7 @@ control 'windows-272' do
     its('DisablePasswordReveal') { should eq 1 }
   end
 end
+=end
 
 control 'windows-273' do
   title 'Ensure \'Enumerate administrator accounts on elevation\' is set to \'Disabled\''
@@ -2532,7 +2537,7 @@ control 'windows-273' do
     its('EnumerateAdministrators') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-274' do
   title 'Ensure \'Allow Telemetry\' is set to \'Enabled: 0 - Security [Enterprise Only]\' or \'Enabled: 1 - Basic\''
   desc 'This policy setting determines the amount of diagnostic and usage data reported to Microsoft.
@@ -2957,7 +2962,7 @@ control 'windows-286' do
     its('SEHOP') { should eq 2 }
   end
 end
-
+=end
 control 'windows-289' do
   title 'Ensure \'Application: Control Event Log behavior when the log file reaches its maximum size\' is set to \'Disabled\''
   desc 'This policy setting controls Event Log behavior when the log file reaches its maximum size.
@@ -3199,7 +3204,7 @@ control 'windows-299' do
     its('PreXPSP2ShellProtocolBehavior') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-300' do
   title 'Ensure \'Turn off Windows Location Provider\' is set to \'Enabled\''
   desc 'This policy setting turns off the Windows Location Provider feature for the computer.
@@ -3296,7 +3301,7 @@ control 'windows-303' do
     its('DisableUserAuth') { should eq 1 }
   end
 end
-
+=end
 control 'windows-304' do
   title 'Ensure \'Prevent the usage of OneDrive for file storage\' is set to \'Enabled\''
   desc 'This policy setting lets you prevent apps and features from working with files on OneDrive using the Next Generation Sync Client.
@@ -3318,7 +3323,7 @@ control 'windows-304' do
     its('DisableFileSyncNGSC') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-305' do
   title 'Ensure \'Prevent the usage of OneDrive for file storage on Windows 8.1\' is set to \'Enabled\''
   desc 'This policy setting lets you prevent apps and features from working with files on OneDrive using the legacy OneDrive/SkyDrive client.
@@ -3342,7 +3347,7 @@ control 'windows-305' do
     its('DisableFileSyncNGSC') { should eq 1 }
   end
 end
-
+=end 
 control 'windows-306' do
   title 'Ensure \'Do not allow passwords to be saved\' is set to \'Enabled\''
   desc 'This policy setting helps prevent Remote Desktop Services / Terminal Services clients from saving passwords on a computer.
@@ -3589,7 +3594,7 @@ control 'windows-315' do
     its('MaxIdleTime') { should_not eq 0 }
   end
 end
-
+=begin
 control 'windows-316' do
   title 'Ensure \'Set time limit for disconnected sessions\' is set to \'Enabled: 1 minute\''
   desc 'This policy setting allows you to configure a time limit for disconnected Remote Desktop Services sessions.
@@ -3636,7 +3641,7 @@ control 'windows-317' do
     its('DeleteTempDirsOnExit') { should eq 1 }
   end
 end
-
+=end
 control 'windows-318' do
   title 'Ensure \'Do not use temporary folders per session\' is set to \'Disabled\''
   desc 'By default, Remote Desktop Services creates a separate temporary folder on the RD Session Host server for each active session that a user maintains on the RD Session Host server. The temporary folder is created on the RD Session Host server in a Temp folder under the user\'s profile folder and is named with the \'sessionid.\' This temporary folder is used to store individual temporary files.
@@ -3660,7 +3665,7 @@ control 'windows-318' do
     its('PerSessionTempDir') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-319' do
   title 'Ensure \'Prevent downloading of enclosures\' is set to \'Enabled\''
   desc 'This policy setting prevents the user from having enclosures (file attachments) downloaded from a feed to the user\'s computer.
@@ -3706,7 +3711,7 @@ control 'windows-320' do
     its('AllowCloudSearch') { should eq 0 }
   end
 end
-
+=end
 control 'windows-321' do
   title 'Ensure \'Allow indexing of encrypted files\' is set to \'Disabled\''
   desc 'This policy setting controls whether encrypted items are allowed to be indexed. When this setting is changed, the index is rebuilt completely. Full volume encryption (such as BitLocker Drive Encryption or a non-Microsoft solution) must be used for the location of the index to maintain security for encrypted files.
@@ -3728,7 +3733,7 @@ control 'windows-321' do
     its('AllowIndexingEncryptedStoresOrItems') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-322' do
   title 'Ensure \'Set what information is shared in Search\' is set to \'Enabled: Anonymous info\''
   desc 'Various levels of information can be shared with Bing in Search, to include user information and location. Configuring this setting prevents users from selecting the level of information shared and enables the most restrictive selection.
@@ -3752,7 +3757,7 @@ control 'windows-322' do
     its('ConnectedSearchPrivacy') { should eq 3 }
   end
 end
-
+=end 
 control 'windows-323' do
   title 'Ensure \'Turn off KMS Client Online AVS Validation\' is set to \'Enabled\''
   desc 'The Key Management Service (KMS) is a Microsoft license activation method that entails setting up a local server that stores the licenses. The server itself needs to connect to Microsoft to activate the KMS service, but subsequent on-network clients can activate Microsoft Windows OS and/or their Microsoft Office via the KMS server instead of connecting directly to Microsoft. This policy setting lets you opt-out of sending KMS client activation data to Microsoft automatically.
@@ -3777,7 +3782,7 @@ control 'windows-323' do
     its('NoGenTicket') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-324' do
   title 'Ensure \'Configure local setting override for reporting to Microsoft MAPS\' is set to \'Disabled\''
   desc 'This policy setting configures a local override for the configuration to join Microsoft Active Protection Service (MAPS), which Microsoft has now renamed to \'Windows Defender Antivirus Cloud Protection Service\'. This setting can only be set by Group Policy.
@@ -3799,7 +3804,7 @@ control 'windows-324' do
     its('LocalSettingOverrideSpynetReporting') { should eq 0 }
   end
 end
-
+=end
 control 'windows-325' do
   title 'Ensure \'Join Microsoft MAPS\' is set to \'Disabled\''
   desc 'This policy setting allows you to join Microsoft MAPS. Microsoft MAPS is the online community that helps you choose how to respond to potential threats. The community also helps stop the spread of new malicious software infections. You can choose to send basic or additional information about detected software. Additional information helps Microsoft create new definitions and help it to protect your computer.
@@ -3830,7 +3835,7 @@ control 'windows-325' do
     its('SpynetReporting') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-326' do
   title 'Ensure \'Turn on behavior monitoring\' is set to \'Enabled\''
   desc 'This policy setting allows you to configure behavior monitoring for Windows Defender Antivirus.
@@ -3852,6 +3857,7 @@ control 'windows-326' do
     its('DisableBehaviorMonitoring') { should eq 0 }
   end
 end
+
 
 control 'windows-327' do
   title 'Ensure \'Configure Watson events\' is set to \'Disabled\''
@@ -4059,7 +4065,7 @@ control 'windows-334' do
     its('DisallowExploitProtectionOverride') { should eq 1 }
   end
 end
-
+=end
 control 'windows-335' do
   title 'Ensure \'Configure Windows SmartScreen\' is set to \'Enabled\''
   desc 'This policy setting allows you to manage the behavior of Windows SmartScreen. Windows SmartScreen helps keep PCs safer by warning users before running unrecognized programs downloaded from the Internet. Some information is sent to Microsoft about files and programs run on PCs with this feature enabled.
@@ -4081,7 +4087,7 @@ control 'windows-335' do
     its('EnableSmartScreen') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-336' do
   title 'Ensure \'Configure Default consent\' is set to \'Enabled: Always ask before sending data\''
   desc 'This setting allows you to set the default consent handling for error reports.
@@ -4206,7 +4212,7 @@ control 'windows-340' do
     its('EnableUserControl') { should eq 0 }
   end
 end
-
+=end
 control 'windows-341' do
   title 'Ensure \'Always install with elevated privileges\' is set to \'Disabled\''
   desc 'This setting controls whether or not Windows Installer should use system permissions when it installs any program on the system.
@@ -4412,6 +4418,7 @@ control 'windows-349' do
   end
 end
 
+=begin
 control 'windows-350' do
   title 'Ensure \'Allow remote server management through WinRM\' is set to \'Disabled\''
   desc 'This policy setting allows you to manage whether the Windows Remote Management (WinRM) service automatically listens on the network for requests on the HTTP transport over the default HTTP port.
@@ -4436,6 +4443,7 @@ control 'windows-350' do
     its('AllowAutoConfig') { should eq 0 }
   end
 end
+=end
 
 control 'windows-351' do
   title 'Ensure \'Allow unencrypted traffic\' is set to \'Disabled\''
@@ -4480,7 +4488,7 @@ control 'windows-352' do
     its('DisableRunAs') { should eq 1 }
   end
 end
-
+=begin
 control 'windows-353' do
   title 'Ensure \'Allow Remote Shell Access\' is set to \'Disabled\''
   desc 'This policy setting allows you to manage configuration of remote access to all supported shells to execute scripts and commands.
@@ -4659,3 +4667,4 @@ control 'windows-359' do
     its('NoAutoRebootWithLoggedOnUsers') { should eq 0 }
   end
 end
+=end
