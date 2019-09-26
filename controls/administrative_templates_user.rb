@@ -201,7 +201,7 @@ control 'windows-367' do
     end
   end
 end
-
+=begin
 control 'windows-368' do
   title 'Ensure \'Configure Windows spotlight on Lock Screen\' is set to Disabled\''
   desc 'This policy setting lets you configure Windows Spotlight on the lock screen.
@@ -227,6 +227,7 @@ control 'windows-368' do
     end
   end
 end
+=end
 =begin
 control 'windows-369' do
   title 'Ensure \'Do not suggest third-party content in Windows spotlight\' is set to \'Enabled\''
