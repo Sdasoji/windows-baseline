@@ -88,7 +88,7 @@ attributes:
   - name: se_impersonate_privilege
     required: false
     description: 'define which users are allowed to impersonate a client after authentication'
-    value: ['S-1-5-19', 'S-1-5-20', 'S-1-5-32-544', 'S-1-5-6', 'S-1-5-32-568']
+    value: ['S-1-5-19', 'S-1-5-20', 'S-1-5-32-544', 'S-1-5-32-568', 'S-1-5-6']
     type: array
   - name: se_load_driver_privilege
     required: false
@@ -120,3 +120,4 @@ attributes:
     description: 'define named pipes that can be accessed anonymously'
     value: []
     type: array
+    
