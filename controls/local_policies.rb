@@ -2047,7 +2047,7 @@ control 'windows-096' do
   describe registry_key('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters') do
     it { should exist }
     it { should have_property 'NullSessionShares' }
-    its('NullSessionShares') { should cmp '"nil"' }
+    its('NullSessionShares') { should cmp nil }
   end
 end
 
