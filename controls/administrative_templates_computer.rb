@@ -4396,7 +4396,7 @@ control 'windows-348' do
     its('AllowDigest') { should eq 0 }
   end
 end
-
+=begin
 control 'windows-349' do
   title 'Ensure \'Allow Basic authentication\' is set to \'Disabled\''
   desc 'This policy setting allows you to manage whether the Windows Remote Management (WinRM) service accepts Basic authentication from a remote client.
@@ -4418,7 +4418,7 @@ control 'windows-349' do
     its('AllowBasic') { should eq 0 }
   end
 end
-
+=end
 =begin
 control 'windows-350' do
   title 'Ensure \'Allow remote server management through WinRM\' is set to \'Disabled\''
@@ -4444,7 +4444,7 @@ control 'windows-350' do
     its('AllowAutoConfig') { should eq 0 }
   end
 end
-=end
+
 
 control 'windows-351' do
   title 'Ensure \'Allow unencrypted traffic\' is set to \'Disabled\''
@@ -4489,6 +4489,7 @@ control 'windows-352' do
     its('DisableRunAs') { should eq 1 }
   end
 end
+=end
 =begin
 control 'windows-353' do
   title 'Ensure \'Allow Remote Shell Access\' is set to \'Disabled\''
