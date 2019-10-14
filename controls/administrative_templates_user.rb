@@ -1,5 +1,5 @@
 title 'Administrative Templates (User)'
-
+=begin
 control 'windows-360' do
   title 'Ensure \'Enable screen saver\' is set to \'Enabled\''
   desc 'This policy setting enables/disables the use of desktop screen savers.
@@ -306,7 +306,6 @@ control 'windows-371' do
     end
   end
 end
-=end
 control 'windows-372' do
   title 'Ensure \'Prevent users from sharing files within their profile.\' is set to \'Enabled\''
   desc 'This policy setting specifies whether users can share files within their profile. By default users are allowed to share files within their profile to other users on their network after an administrator opts in the computer. An administrator can opt in the computer by using the sharing wizard to share a file within their profile.
@@ -358,7 +357,6 @@ control 'windows-373' do
     end
   end
 end
-=begin
 control 'windows-374' do
   title 'Ensure \'Prevent Codec Download\' is set to \'Enabled\''
   desc 'This setting controls whether Windows Media Player is allowed to download additional codecs for decoding media files it does not already understand.
