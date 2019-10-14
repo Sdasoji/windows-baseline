@@ -137,7 +137,7 @@ control 'windows-016' do
   ref 'Center for Internet Security', url: 'https://www.cisecurity.org/'
   describe security_policy do
     its('SeRemoteInteractiveLogonRight') { should eq attribute('se_remote_interactive_logon_right') }
-    its('SeInteractiveLogonRight') { should eq ('S-1-5-32-544') } 
+    its('SeInteractiveLogonRight') { should cmp ('S-1-5-32-544') } 
   end
 end
 
@@ -1072,7 +1072,8 @@ control 'windows-058' do
   describe registry_key('HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon') do
     it { should exist }
     it { should have_property 'AllocateDASD' }
-    its('AllocateDASD') { should eq 0 }
+    its('AllocateDASD') { should cmp 0 }
+    its('AllocateDASD') { should cmp "0" }
   end
 end
 
@@ -1829,7 +1830,7 @@ control 'windows-089' do
   only_if('This Control only executes if attribute(\'level_1_or_2\') is set to 2') do
     attribute('level_1_or_2') == 2
   end
-  describe registry_key('HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa') do
+  describe registry_key('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa') do
     it { should exist }
     it { should have_property 'DisableDomainCreds' }
     its('DisableDomainCreds') { should eq 1 }
@@ -1881,7 +1882,7 @@ control 'windows-091' do
   describe registry_key('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters') do
     it { should exist }
     it { should have_property 'NullSessionPipes' }
-    its('NullSessionPipes') { should eq attribute('hklm_null_session_pipes') }
+    its('NullSessionPipes') { should cmp attribute('hklm_null_session_pipes') }
   end
 end
 
@@ -1956,19 +1957,19 @@ control 'windows-093' do
     describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedPaths') do
       it { should exist }
       it { should have_property 'Machine' }
-      its('Machine') { should eq ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog'] }
+      its('Machine') { should match ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog'] }
     end
   elsif wins_installed && !ad_cert_installed
     describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedPaths') do
       it { should exist }
       it { should have_property 'Machine' }
-      its('Machine') { should eq ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog', 'System\\CurrentControlSet\\Services\\WINS'] }
+      its('Machine') { should match ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog', 'System\\CurrentControlSet\\Services\\WINS'] }
     end
   elsif !wins_installed && ad_cert_installed
     describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedPaths') do
       it { should exist }
       it { should have_property 'Machine' }
-      its('Machine') { should eq ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog', 'System\\CurrentControlSet\\Services\\CertSvc'] }
+      its('Machine') { should match ['System\\CurrentControlSet\\Control\\Print\\Printers', 'System\\CurrentControlSet\\Services\\Eventlog', 'Software\\Microsoft\\OLAP Server', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Print', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows', 'System\\CurrentControlSet\\Control\\ContentIndex', 'System\\CurrentControlSet\\Control\\Terminal Server', 'System\\CurrentControlSet\\Control\\Terminal Server\\UserConfig', 'System\\CurrentControlSet\\Control\\Terminal Server\\DefaultUserConfiguration', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\Perflib', 'System\\CurrentControlSet\\Services\\SysmonLog', 'System\\CurrentControlSet\\Services\\CertSvc'] }
     end
   elsif wins_installed && ad_cert_installed
     describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedPaths') do
@@ -2044,7 +2045,7 @@ control 'windows-096' do
   describe registry_key('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters') do
     it { should exist }
     it { should have_property 'NullSessionShares' }
-    its('NullSessionShares') { should cmp [''] }
+    its('NullSessionShares') { should cmp 'nil' }
   end
 end
 
@@ -2286,7 +2287,7 @@ control 'windows-106' do
   describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0') do
     it { should exist }
     it { should have_property 'NTLMMinClientSec' }
-    its('NTLMMinClientSec') { should eq 536870912 }
+    its('NTLMMinClientSec') { should eq 537395200 }
   end
 end
 
@@ -2308,7 +2309,7 @@ control 'windows-107' do
   describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0') do
     it { should exist }
     it { should have_property 'NTLMMinServerSec' }
-    its('NTLMMinServerSec') { should eq 536870912 }
+    its('NTLMMinServerSec') { should eq 537395200 }
   end
 end
 

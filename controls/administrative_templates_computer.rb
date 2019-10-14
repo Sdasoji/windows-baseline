@@ -1002,6 +1002,7 @@ control 'windows-212' do
   end
 end
 =end
+=begin
 control 'windows-213' do
   title 'Ensure \'Require domain users to elevate when setting a network\'s location\' is set to \'Enabled\''
   desc 'This policy setting determines whether to require domain users to elevate when setting a network\'s location.
@@ -1023,7 +1024,7 @@ control 'windows-213' do
     its('NC_StdDomainUserSetLocation') { should eq 1 }
   end
 end
-
+=end
 control 'windows-214' do
   title 'Ensure \'Hardened UNC Paths\' is set to \'Enabled, with Require Mutual Authentication and Require Integrity set for all NETLOGON and SYSVOL shares\''
   desc 'This policy setting configures secure access to UNC paths.
@@ -1055,11 +1056,11 @@ control 'windows-214' do
     it { should exist }
     it { should have_property '\\\*\\NETLOGON' }
     it { should have_property '\\\*\\SYSVOL' }
-    its('\\\*\\NETLOGON') { should match(//) }
-    its('\\\*\\SYSVOL') { should match(//) }
+    #its('\\\*\\NETLOGON') { should match(//) }
+    #its('\\\*\\SYSVOL') { should match(//) }
   end
 end
-
+=begin
 control 'windows-215' do
   title 'Disable IPv6 (Ensure TCPIP6 Parameter \'DisabledComponents\' is set to \'0xff (255)\')'
   desc 'Internet Protocol version 6 (IPv6) is a set of protocols that computers use to exchange information over the Internet and over home and business networks. IPv6 allows for many more IP addresses to be assigned than IPv4 did. Older networking, hosts and operating systems may not support IPv6 natively.
@@ -1084,7 +1085,7 @@ control 'windows-215' do
     its('DisabledComponents') { should eq 255 }
   end
 end
-
+=end
 control 'windows-216' do
   title 'Ensure \'Configuration of wireless settings using Windows Connect Now\' is set to \'Disabled\''
   desc 'This policy setting allows the configuration of wireless settings using Windows Connect Now (WCN). The WCN Registrar enables the discovery and configuration of devices over Ethernet (UPnP) over in-band 802.11 Wi-Fi through the Windows Portable Device API (WPD) and via USB Flash drives. Additional options are available to allow discovery and configuration over a specific medium.
