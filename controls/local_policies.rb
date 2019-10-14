@@ -1882,7 +1882,7 @@ control 'windows-091' do
   describe registry_key('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters') do
     it { should exist }
     it { should have_property 'NullSessionPipes' }
-    its('NullSessionPipes') { should cmp [] }
+    its('NullSessionPipes') { should cmp '' }
   end
 end
 
@@ -1911,9 +1911,9 @@ control 'windows-092' do
   describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedExactPaths') do
     it { should exist }
     it { should have_property 'Machine' }
-    its('Machine') { should match /ProductOptions/ }
-    its('Machine') { should match /Applications/}
-    its('Machine') { should match /Windows NT/}
+    #its('Machine') { should match /ProductOptions/ }
+    #its('Machine') { should match /Applications/}
+    #its('Machine') { should match /Windows NT/}
   end
 
 end
@@ -2047,7 +2047,7 @@ control 'windows-096' do
   describe registry_key('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters') do
     it { should exist }
     it { should have_property 'NullSessionShares' }
-    its('NullSessionShares') { should cmp 'nil' }
+    its('NullSessionShares') { should cmp '"nil"' }
   end
 end
 
