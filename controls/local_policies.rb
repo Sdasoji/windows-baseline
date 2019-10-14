@@ -1911,9 +1911,9 @@ control 'windows-092' do
   describe registry_key('HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SecurePipeServers\\Winreg\\AllowedExactPaths') do
     it { should exist }
     it { should have_property 'Machine' }
-    its('Machine') { should match \ProductOptions\ }
-    its('Machine') { should match \Applications\}
-    its('Machine') { should match \Windows NT\ }
+    its('Machine') { should match /ProductOptions/ }
+    its('Machine') { should match /Applications/}
+    its('Machine') { should match /Windows NT/}
   end
 
 end
